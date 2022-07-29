@@ -2,7 +2,6 @@ import { createUserOutputSchema, createUserSchema } from "../../schema/user.sche
 import argon2 from "argon2"
 import createRouter from "../createRouter";
 import { TRPCError } from "@trpc/server";
-import trpc from "../../utils/trpc";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
 
 const userRouter = createRouter()
@@ -23,6 +22,8 @@ const userRouter = createRouter()
       }
 
       try {
+        console.log(email, username, hash)
+
         const user = await ctx.prisma.user.create({
           data: {
             email, 
@@ -41,6 +42,8 @@ const userRouter = createRouter()
             })
           }
         }
+
+        console.log(e)
 
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
