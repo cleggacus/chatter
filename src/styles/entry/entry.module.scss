@@ -1,0 +1,104 @@
+@use "vars" as *;
+
+.container {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; 
+  height: 100%;
+  background-color: var(--bg-1);
+
+  .formContainer {
+    animation: 1s ease fade-in;
+  }
+}
+
+.formContainer {
+  position: relative;
+  overflow: hidden;
+  width: $width;
+  height: $height;
+  background-color: var(--bg-2);
+  border-radius: var(--curviness);
+
+  .forms {
+    position: absolute;
+
+    height: 100%;
+    width: 100%;
+
+    transition: left 0.5s ease;
+  }
+  
+  .infos {
+    position: absolute;
+    transition: left 0.5s ease-in-out;
+    width: $width-info;
+    height: 100%;
+    overflow: hidden;
+    user-select: none;
+    pointer-events: none;
+
+    .infosContent {
+      position: absolute;
+      transition: left 0.5s ease-in-out;
+      width: $width;
+      height: 100%;
+      background-color: var(--bg-accent-1);
+
+      .bg {
+        position: absolute;
+        transition: left 0.5s ease-in-out;
+        filter: opacity(0.15) blur(3px);
+        width: $width + 150px;
+        height: $height;
+        background-repeat: repeat;
+      }
+    }
+  }
+
+  .infos.login {
+    left: $width-form;
+
+    .infosContent {
+      left: -$width-form;
+    }
+  }
+
+  .infos.register {
+    left: 0;
+
+    .infosContent {
+      left: 0;
+    }
+  }
+
+  .infos.transition {
+    animation: 0.5s ease-in-out transition-info;
+  }
+}
+
+@keyframes transition-info {
+  0% {
+    width: $width-info;
+  }
+  50% {
+    width: $width-info-grow;
+  }
+  100% {
+    width: $width-info;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    margin-top: -100px;
+  }
+
+  100% {
+    opacity: 1;
+    margin-top: 0px;
+  }
+}

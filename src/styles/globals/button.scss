@@ -1,0 +1,15 @@
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: var(--curviness);
+  background-color: var(--bg-accent-1);
+  color: var(--fg-1);
+  transition: outline 0.3s ease;
+  padding: 10px 0;
+  font-size: 1em;
+  text-transform: uppercase;
+}
+
+button:hover {
+  background-color: var(--bg-accent-2);
+}

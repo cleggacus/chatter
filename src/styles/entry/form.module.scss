@@ -1,0 +1,51 @@
+@use "vars" as *;
+
+.container {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: $width-form;
+  height: 100%;
+
+  transition: 
+    left 0.5s ease, 
+    right 0.5s ease,
+    opacity 0.5s ease;
+
+  .content {
+    width: 100%;
+    padding: 0 20%;
+
+    input, button {
+      width: 100%;
+      margin: 7px 0;
+    }
+  }
+}
+
+.container.login {
+  left: 0;
+}
+
+.container.register {
+  right: 0;
+}
+
+.container.login.inactive {
+  left: 75px;
+}
+
+.container.register.inactive {
+  right: 75px;
+}
+
+.container.active {
+  opacity: 1;
+}
+
+.container.inactive {
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+}

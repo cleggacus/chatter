@@ -1,0 +1,22 @@
+input {
+  border: none;
+  border-radius: var(--curviness);
+  background-color: var(--bg-1);
+  color: var(--fg-1);
+  padding: 10px 15px;
+  font-size: 1em;
+
+  outline-style: solid;
+  outline-width: 1px;
+  outline-color: var(--bg-1);
+
+  transition: outline 0.3s ease;
+}
+
+input::placeholder {
+  color: var(--fg-2);
+}
+
+input:focus {
+  outline-color: var(--fg-2);
+}
