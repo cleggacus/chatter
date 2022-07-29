@@ -14,6 +14,7 @@ const Register: FC<Props> = ({ active, toggleState }) => {
       <input placeholder="Retype Password" type="password"></input>
       <input placeholder="Password" type="password"></input>
       <button>Register</button>
+      <div className={styles.seperator}><div/><p>or</p><div/></div>
       <button onClick={toggleState}>Sign In</button>
     </div>
   </div>
