@@ -4,12 +4,20 @@ button {
   border-radius: var(--curviness);
   background-color: var(--bg-accent-1);
   color: var(--fg-1);
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, outline 0.3s ease;
   padding: 10px 0;
   font-size: 1em;
   text-transform: uppercase;
+
+  outline-style: solid;
+  outline-width: 1px;
+  outline-color: var(--bg-1);
 }
 
 button:hover {
   background-color: var(--bg-accent-2);
+}
+
+button:focus {
+  outline-color: var(--fg-2);
 }

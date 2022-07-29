@@ -51,7 +51,7 @@
         position: absolute;
         transition: left 0.5s ease-in-out;
         filter: opacity(0.15) blur(3px);
-        width: $width + 150px;
+        width: $width + $width-info-bg-paralax;
         height: $height;
         background-repeat: repeat;
       }
@@ -63,6 +63,10 @@
 
     .infosContent {
       left: -$width-form;
+
+      .bg {
+        left: -$width-info-bg-paralax;
+      }
     }
   }
 
@@ -71,6 +75,10 @@
 
     .infosContent {
       left: 0;
+
+      .bg {
+        left: 0;
+      }
     }
   }
 

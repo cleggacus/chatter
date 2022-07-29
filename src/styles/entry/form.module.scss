@@ -17,7 +17,12 @@
     width: 100%;
     padding: 0 20%;
 
-    input, button {
+    input {
+      width: 100%;
+      margin: 10px 0 0 0;
+    }
+
+    button {
       width: 100%;
       margin: 10px 0;
     }
@@ -39,6 +44,15 @@
         color: var(--fg-2);
         margin: 0;
       }
+    }
+
+    p {
+      margin: 5px 0 0 0;
+      color: var(--fg-err);
+    }
+
+    .err {
+      outline: solid 1px var(--fg-err);
     }
   }
 }
