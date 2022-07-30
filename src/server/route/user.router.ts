@@ -75,8 +75,8 @@ const userRouter = createRouter()
 
       const token = signJwt({
         id: user.id,
-        username: user.id,
-        email: user.id
+        username: user.username,
+        email: user.email
       })
 
       ctx.res.setHeader("Set-Cookie", serialize("token", token, {
@@ -91,21 +91,12 @@ const userRouter = createRouter()
       }
     }
   })
-  .middleware(({ ctx, next }) => {
-    if(!ctx.user) {
-      throw new TRPCError({
-        code: 'UNAUTHORIZED',
-        message: 'You are not authorized for this route.',
-      }); 
-    }
-    return next();
-  })
   .query("auth", {
     resolve: async ({ ctx }) => {
       return ctx.user;
     }
   })
-  .query("logout", {
+  .mutation("logout", {
     resolve: async ({ ctx }) => {
       ctx.res.setHeader("Set-Cookie", serialize("token", "", {
         httpOnly: true

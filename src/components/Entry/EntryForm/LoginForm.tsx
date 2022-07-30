@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { FC, useState } from "react";
+import { useUser } from "../../../context/UserContext";
 import styles from "../../../styles/entry/form.module.scss"
 import isEmail from "../../../utils/isEmail";
 import trpc from "../../../utils/trpc";
@@ -15,11 +16,12 @@ const LoginForm: FC<Props> = ({ active, toggleState }) => {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
 
-  const router = useRouter();
+  const { refetch } = useUser();
+
 
   const { mutate } = trpc.useMutation(["users.login"], {
     onSuccess() {
-      router.push("/");
+      refetch();
     }, 
     onError(err) {
       setError(err.message);

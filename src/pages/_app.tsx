@@ -6,19 +6,33 @@ import { loggerLink } from "@trpc/client/links/loggerLink"
 import { httpBatchLink } from "@trpc/client/links/httpBatchLink"
 import { Page } from "../../types/page";
 import { AppProps } from "next/app";
-import { FC, ReactNode } from "react";
 import DefaultLayout from "../components/Layouts/DefaultLayout";
+import { UserProvider } from "../context/UserContext";
+import trpc from "../utils/trpc";
+import { useState } from "react";
 
 type Props = AppProps & {
   Component: Page
 }
 
-const MyApp: FC<Props> = ({ Component, pageProps }) => {
+const MyApp = ({ Component, pageProps }: Props) => {
+  const [loading, setLoading] = useState(true);
   const Layout = Component.Layout || DefaultLayout;
 
-  return <Layout>
-    <Component {...pageProps} />
-  </Layout>
+  const { data, refetch } = trpc.useQuery(["users.auth"], {
+    onSuccess(){
+      setLoading(false)
+    }
+  });
+
+  if(loading)
+    return <></>
+
+  return <UserProvider value={{user: data || null, refetch}}>
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
+  </UserProvider>
 };
 
 export default withTRPC<AppRouter>({
@@ -53,9 +67,7 @@ export default withTRPC<AppRouter>({
 
         return {};
       },
-      links,
-      ssr: false
+      links
     };
-  },
-  ssr: true,
+  }
 })(MyApp);

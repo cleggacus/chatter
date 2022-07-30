@@ -1,4 +1,13 @@
 .container {
+  display: flex;
   width: 100vw;
   height: 100vh;
+  background-color: var(--bg-2);
+
+  .content {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+  }
 }

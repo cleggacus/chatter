@@ -1,12 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { verifyJwt } from '../utils/jwt'
 
-type CtxUser = {
-  id: string
-  email: string
-  name: string
+export type CtxUser = {
+  id: string,
+  email: string,
+  username: string,
   iat: string
-  exp: number
 }
 
 const getUserFromRequest = (req: NextApiRequest) => {
@@ -15,13 +14,13 @@ const getUserFromRequest = (req: NextApiRequest) => {
   if (token) {
     try {
       const verified = verifyJwt<CtxUser>(token)
-      return verified
+      return verified;
     } catch (e) {
-      return null
+      return null;
     }
   }
 
-  return null
+  return null;
 }
 
 const createContext = ({
