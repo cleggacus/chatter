@@ -1,10 +1,9 @@
-import { NextPage } from "next";
-
 import styles from "../styles/userCreated.module.scss";
 import {BsPersonCheckFill} from "react-icons/bs";
 import Link from "next/link";
+import { Page } from "../../types/page";
 
-const userCreated: NextPage = () => {
+const userCreated: Page = () => {
   return <div className={styles.container}>
     <div className={styles.content}>
       <BsPersonCheckFill className={styles.icon}></BsPersonCheckFill>

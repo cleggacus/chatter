@@ -3,12 +3,14 @@ import Link from 'next/link'
 import { Page } from '../../types/page'
 import AppLayout from '../components/Layouts/AppLayout'
 
-const Home: Page = () => {
+const Other: Page = () => {
   return <div>
-    <Link href="/other"><a>CUM</a></Link>
+    <Link href="/"><a>Another CUM</a></Link>
+    <Link href="/login"><a>Login</a></Link>
   </div>
 }
 
-Home.Layout = AppLayout;
+Other.Layout = AppLayout;
 
-export default Home
+export default Other
+

@@ -1,7 +1,7 @@
-import { NextPage } from "next"
+import { Page } from "../../types/page"
 import Entry from "../components/Entry"
 
-const Register: NextPage = () => {
+const Register: Page = () => {
   return <Entry entryState="register"></Entry>
 }
 

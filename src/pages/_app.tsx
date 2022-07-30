@@ -1,13 +1,24 @@
 import "../styles/globals/index.scss";
 
 import { withTRPC } from '@trpc/next';
-import { AppType } from 'next/dist/shared/lib/utils';
 import { AppRouter } from '../server/route/app.router';
 import { loggerLink } from "@trpc/client/links/loggerLink"
 import { httpBatchLink } from "@trpc/client/links/httpBatchLink"
+import { Page } from "../../types/page";
+import { AppProps } from "next/app";
+import { FC, ReactNode } from "react";
+import DefaultLayout from "../components/Layouts/DefaultLayout";
 
-const MyApp: AppType = ({ Component, pageProps }) => {
-  return <Component {...pageProps} />;
+type Props = AppProps & {
+  Component: Page
+}
+
+const MyApp: FC<Props> = ({ Component, pageProps }) => {
+  const Layout = Component.Layout || DefaultLayout;
+
+  return <Layout>
+    <Component {...pageProps} />
+  </Layout>
 };
 
 export default withTRPC<AppRouter>({
