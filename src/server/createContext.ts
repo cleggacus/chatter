@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { verifyJwt } from '../utils/jwt'
-import prisma from "../utils/prisma"
 
 type CtxUser = {
   id: string
@@ -33,7 +32,7 @@ const createContext = ({
   res: NextApiResponse
 }) => {
   const user = getUserFromRequest(req)
-  return { req, res, prisma, user }
+  return { req, res, user }
 }
 
 export {

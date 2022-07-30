@@ -8,10 +8,9 @@ generator client {
 datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
-  transactions = false
 }
 
-model User {
+model users {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   email String @unique
   username String @unique 

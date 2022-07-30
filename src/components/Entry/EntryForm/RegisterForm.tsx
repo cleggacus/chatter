@@ -1,6 +1,7 @@
+import { useRouter } from "next/router";
 import { FC, useState } from "react";
 import { ZodError } from "zod";
-import { CreateUserInput, createUserSchema } from "../../../schema/user.schema";
+import { CreateUserInput } from "../../../schema/user.schema";
 import styles from "../../../styles/entry/form.module.scss"
 import trpc from "../../../utils/trpc";
 
@@ -33,10 +34,11 @@ const Register: FC<Props> = ({ active, toggleState }) => {
   const [password, setPassword] = useState("");
   const [repassword, setRepassword] = useState("");
 
-  const { mutate, error } = trpc.useMutation(["users.create-user"], {
-    onSuccess(data, variables, context) {
-      console.log("successs")
-      console.log(data, variables, context)
+  const router = useRouter();
+
+  const { mutate } = trpc.useMutation(["users.create-user"], {
+    onSuccess() {
+      router.push("/userCreated");
     },
     onError(error) {
       const err = new ZodError(JSON.parse(error.message))
@@ -46,6 +48,7 @@ const Register: FC<Props> = ({ active, toggleState }) => {
   });
 
   const parseZodError = (err: ZodError<CreateUserInput>) => {
+    console.log(err)
     let tempErrors = getInitialErrors();
 
     for(const issue of err.issues)
@@ -55,35 +58,9 @@ const Register: FC<Props> = ({ active, toggleState }) => {
     return tempErrors;
   }
 
-  const clientCheck = () => {
-    let failed = false;
-    let temp = getInitialErrors();
-
-    try {
-      createUserSchema.parse({ email, password, username })
-    } catch(err) {
-      failed = true;
-      temp = parseZodError(err as ZodError<CreateUserInput>);
-    }
-
-    if(password != repassword) {
-      failed = true;
-      temp.repassword = ["Passwords don't match."];
-    }
-
-    if(!failed)
-      return true;
-
-    setErrors(temp);
-
-    return false;
-  }
-
   const submit = () => {
-    if(!clientCheck()) return;
-
     mutate({
-      email, username, password 
+      email, username, password, repassword
     })
   }
 
