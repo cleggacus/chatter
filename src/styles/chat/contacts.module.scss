@@ -1,0 +1,171 @@
+@use "./vars.scss" as *;
+
+.container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+
+  .section {
+
+    > div {
+      border-radius: var(--curviness);
+      background-color: var(--bg-3);
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .scrollerOuter {
+    overflow: hidden;
+    flex: 1;
+    width: 100%;
+    padding: $padding;
+
+    .scroller {
+      border-radius: var(--curviness);
+      overflow: auto;
+      height: 100%;
+      width: 100%;
+
+      .section {
+        width: 100%;
+        padding: $padding 0;
+
+        .inner {
+          padding: 15px 0;
+        }
+
+        .profileSeperator {
+          width: 100%;
+          height: 1px;
+          padding: 0 30px 0 110px;
+
+          > div {
+            background-color: var(--bg-4);
+            width: 100%;
+            height: 100%;
+          }
+        }
+
+        .profile {
+          display: flex;
+          width: 100%;
+          padding: 15px 30px;
+
+          .picture {
+            position: relative;
+            height: 60px;
+            width: 60px;
+
+            .image {
+              border-radius: 100%;
+              object-fit: cover;
+            }
+
+            .badge {
+              position: absolute;
+              width: 15px;
+              height: 15px;
+              border-radius: 50%;
+              bottom: 0;
+              right: 0;
+            }
+
+            .offline {
+              background-color: #4c5070;
+            }
+
+            .away {
+              background-color: #a07e36;
+            }
+
+            .online {
+              background-color: #216151;
+            }
+          }
+
+          .userInfo {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 10px 20px;
+            height: 100%;
+            flex: 1;
+
+            h3, p {
+              margin: 0;
+            }
+
+            p {
+              color: var(--fg-2);
+            }
+          }
+
+          .chatInfo {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-end;
+
+            h4 {
+              margin: 0;
+            }
+
+            .unread {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              background-color: var(--bg-4);
+              border-radius: 50%;
+              width: 30px;
+              height: 30px;
+
+              h4 {
+                font-weight: normal;
+                margin: 0 0 2px 0;
+              }
+            }
+          }
+        }
+      }
+
+      .section:first-child {
+        padding: 0 0 $padding 0;
+      }
+
+      .section:last-child {
+        padding: $padding 0 0 0;
+      }
+    }
+  }
+
+  ::-webkit-scrollbar {
+    width: 0;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--bg-2);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--bg-3);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--bg-3);
+  }
+
+  .search {
+    padding: $padding;
+
+    > div {
+      input {
+        padding: 20px 25px;
+        width: 100%;
+        background-color: var(--bg-3);
+        outline: var(--bg-3);
+      }
+    }
+  }
+}

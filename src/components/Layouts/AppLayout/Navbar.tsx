@@ -9,34 +9,42 @@ import { RiSettings2Line } from "react-icons/ri";
 import { useUser } from "../../../context/UserContext";
 import trpc from "../../../utils/trpc";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 type DivProps = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 
 type ItemProps = DivProps & {
+  href?: string,
   Icon: IconType
 }
 
-const NavbarItem: FC<ItemProps> = ({ Icon, children, className, ...props }) => {
-  return <div {...props} className={`${styles.item} ${className || ""}`}>
-    <div className={styles.itemSelect} >
-      <div className={styles.itemInner} >
-        <div className={styles.icon}>
-          <Icon className={styles.reactIcon}/>
-        </div>
+const NavbarItem: FC<ItemProps> = ({ Icon, href = "#", children, className, ...props }) => {
+  const router = useRouter();
 
-        <div className={styles.content}>
-          { 
-            typeof children == "string" ?
-              <a>{children}</a> : children
-          }
+  const isActive = () => 
+    href != "#" && href == router.pathname;
+
+  return <Link href={href}>
+    <div {...props} className={`${styles.item} ${isActive() ? styles.active : ""} ${className || ""}`}>
+      <div className={styles.itemSelect} >
+        <div className={styles.itemInner} >
+          <div className={styles.icon}>
+            <Icon className={styles.reactIcon}/>
+          </div>
+
+          <div className={styles.content}>
+            { 
+              typeof children == "string" ?
+                <a>{children}</a> : children
+            }
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </Link>
 }
 
 const Navbar: FC = () => {
-  const router = useRouter();
   const { user, refetch } = useUser();
   const [open, setOpen] = useState(false);
   const toggleNavbar = () => setOpen(!open);
@@ -57,14 +65,14 @@ const Navbar: FC = () => {
     </div>
 
     <div className={styles.section}>
-      <NavbarItem onClick={toggleNavbar} Icon={MdOutlineSpaceDashboard}>Home</NavbarItem>
-      <NavbarItem onClick={toggleNavbar} Icon={BiMessageSquareDetail}>Messages</NavbarItem>
-      <NavbarItem onClick={toggleNavbar} Icon={FiUser}>{user?.username}</NavbarItem>
-      <NavbarItem onClick={toggleNavbar} Icon={RiSettings2Line}>Settings</NavbarItem>
+      <NavbarItem href="/" Icon={MdOutlineSpaceDashboard}>Home</NavbarItem>
+      <NavbarItem href="/chat" Icon={BiMessageSquareDetail}>Messages</NavbarItem>
+      <NavbarItem href="/user" Icon={FiUser}>{user?.username}</NavbarItem>
+      <NavbarItem href="/settings" Icon={RiSettings2Line}>Settings</NavbarItem>
     </div>
 
     <div className={styles.section}>
-      <NavbarItem onClick={toggleNavbar} Icon={FiMoon}>Toggle theme</NavbarItem>
+      <NavbarItem Icon={FiMoon}>Toggle theme</NavbarItem>
       <NavbarItem onClick={logout} Icon={FiLogOut}>Log out</NavbarItem>
     </div>
   </div>

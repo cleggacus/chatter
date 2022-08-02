@@ -1,0 +1,20 @@
+@use "./vars.scss" as *;
+
+.container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  padding: $padding;
+
+  .section {
+    display: flex;
+  }
+
+  .section1 {
+    width: 500px;
+  }
+
+  .section2 {
+    flex: 1;
+  }
+}

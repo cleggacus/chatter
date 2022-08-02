@@ -1,0 +1,133 @@
+@use "./vars.scss" as *;
+
+.container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--curviness);
+
+  > div {
+    padding: $padding;
+  }
+
+  .top {
+    width: 100%;
+
+    > div {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      height: 58px;
+      width: 100%;
+
+      button {
+        margin: 0 0 0 (2*$padding);
+        padding: 15px 20px;
+      }
+
+      .outline {
+        background-color: var(--bg-2);
+        outline-color: var(--fg-2);
+        color: var(--fg-2);
+      }
+
+      .outline:hover {
+        outline-color: var(--fg-1);
+        color: var(--fg-1);
+      }
+    }
+  }
+
+  .main {
+    flex: 1;
+    width: 100%;
+
+    > div {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      background-color: var(--bg-3);
+      border-radius: var(--curviness);
+
+      .input {
+        width: 100%;
+        padding: 20px;
+
+        .inputInner {
+          display: flex;
+          background-color: var(--bg-4);
+          border-radius: var(--curviness);
+          height: 60px;
+          padding: 10px;
+
+          input {
+            height: 100%;
+            flex: 1;
+            background-color: var(--bg-4);
+            outline-color: var(--bg-4);
+          }
+
+          input:focus {
+            outline-color: var(--bg-4);
+          }
+
+          .noback {
+            color: var(--fg-2);
+            background-color: inherit;
+            outline: inherit;
+          }
+
+          .noback:hover {
+            color: var(--fg-1);
+            background-color: inherit;
+            outline: inherit;
+          }
+
+          button {
+            height: 100%;
+            width: auto;
+            padding: 10px;
+            margin: 0 0 0 10px;
+
+            svg {
+              height: 100%;
+              width: auto;
+            }
+          }
+        }
+      }
+
+      .content {
+        flex: 1;
+        padding: 20px;
+
+        .me {
+          justify-content: flex-end;
+
+          .messageContent{
+            border-radius: var(--curviness) var(--curviness) 0 var(--curviness) !important;
+          }
+        }
+
+        .message {
+          display: flex;
+          padding: 15px;
+          width: 100%;
+
+          .messageContent {
+            width: fit-content;
+            background-color: var(--bg-4);
+            padding: 15px;
+            border-radius: var(--curviness) var(--curviness) var(--curviness) 0;
+
+            p {
+              margin: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}

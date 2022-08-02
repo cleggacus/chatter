@@ -1,11 +1,14 @@
-import type { GetServerSideProps, NextPage } from 'next'
-import Link from 'next/link'
 import { Page } from '../../types/page'
-import Auth from '../components/Auth'
+import ChatComponent from '../components/Chat/ChatComponent'
 import AppLayout from '../components/Layouts/AppLayout'
+import styles from '../styles/home.module.scss'
 
 const Home: Page = () => {
-  return <Link href="/other"><a>CUM</a></Link>
+  return <div className={styles.container}>
+    <div className={`${styles.section}`}>
+      <ChatComponent></ChatComponent>
+    </div>
+  </div>
 }
 
 Home.Layout = AppLayout;
